@@ -35,13 +35,11 @@ public class Main {
 				Student studentObj = new Student(name, address, age);
 				DB_Dao.insertStudentRecord(studentObj);
 				
-				
-				
-				
-				
+					
 				break;
 				
 			case 2:
+				DB_Dao.showRecords();
 				
 				break;
 				
