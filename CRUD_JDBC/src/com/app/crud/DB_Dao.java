@@ -24,7 +24,7 @@ public class DB_Dao {
             e.printStackTrace(); // Log or handle the exception appropriately in a real application.
         }
         
-    }
+    }//End of insertStudentRecord()
     
     public static void showRecords() {
     	try {
@@ -47,12 +47,46 @@ public class DB_Dao {
 				System.out.println("+++++++++++++++++++++++++++");
 			}
     		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }	// End of the showRecords()
+    
+    
+    public static void showRecordByID(int getid) {
+    	try {
+    		Connection con= DB_Connection.createConnection();
+    		String query="select * from records where id= ?";
+    		PreparedStatement pstm= con.prepareStatement(query);
+    		pstm.setInt(1, getid);
+    		ResultSet resultSet= pstm.executeQuery();
     		
+    		while (resultSet.next()) {
+				int id= resultSet.getInt(1);
+				String name= resultSet.getString(2);
+				String address= resultSet.getString(3);
+				int age= resultSet.getInt(4);
+				System.out.println("\t["+id+", "+name+", "+address+", "+age+"]");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}	//End of the showRecordByID(int getid)
+    
+    
+    public static void deleteRecordByID(int deleteID) {
+    	try {
+    		Connection con= DB_Connection.createConnection();
+    		String query="delete from records where id= ?";
+    		PreparedStatement pstm= con.prepareStatement(query);
+    		pstm.setInt(1, deleteID);
+    		pstm.execute();
+   			System.out.println("Record Removed");    		
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-    }
+    }	//End of the deleteRecordByID(int deleteID)
     
     
 }
